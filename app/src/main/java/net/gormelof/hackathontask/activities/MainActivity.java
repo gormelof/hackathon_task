@@ -1,4 +1,4 @@
-package net.gormelof.hackathontask;
+package net.gormelof.hackathontask.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,12 +15,15 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import net.gormelof.hackathontask.api.HackathonService;
+import net.gormelof.hackathontask.api.Pageable;
+import net.gormelof.hackathontask.R;
+import net.gormelof.hackathontask.api.ServiceGenerator;
 import net.gormelof.hackathontask.request.searchrecords.SearchData;
 import net.gormelof.hackathontask.response.searchrecords.*;
 import net.gormelof.hackathontask.response.searchrecords.Record;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,22 +32,22 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName().toUpperCase();
+
     TableLayout maintable;
     TableRow tableRow,rowHead;
     LinearLayout separator;
     TextView value;
     TextView textView;
-    Pageable<net.gormelof.hackathontask.response.searchrecords.Record> pageableArray;
+    Pageable<Record> pageableArray;
     Button buttonNext;
     Button buttonPrev;
     TextView textViewPageCount;
     ArrayList<Record> myValues;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         textView = (TextView) findViewById(R.id.tvID);
         maintable = (TableLayout) findViewById(R.id.main);
@@ -94,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         progressDoalog = new ProgressDialog(MainActivity.this);
         progressDoalog.setMax(100);
         progressDoalog.setMessage("Its loading....");
-        progressDoalog.setTitle("ProgressDialog bar example");
+        progressDoalog.setTitle("Getting Data");
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         // show it
         progressDoalog.show();
@@ -107,19 +110,6 @@ public class MainActivity extends AppCompatActivity {
                     pageableArray.setPage(1);
                     textViewPageCount.setText("Page " + pageableArray.getPage() + " of " + pageableArray.getMaxPages());
 
-
-                    /*
-                    int itemCount = response.body().getRecords().size();
-                    int pageCount = itemCount / 10;
-                    int page = 0;
-                    List<Page> items = new ArrayList<Page>();
-                    for (int i = 0; i < itemCount; i++) {
-                        if (i % 10 == 0) {
-                            page++;
-                        }
-                        items.add(new Page(page, response.body().getRecords().get(i)));
-                    }
-                    */
                     progressDoalog.dismiss();
                     displayPage();
                 }
@@ -146,19 +136,7 @@ public class MainActivity extends AppCompatActivity {
             value = new TextView(this);
             value.setLayoutParams(textView.getLayoutParams());
             value.setGravity(Gravity.CENTER_HORIZONTAL);
-            value.setText("c");
-            tableRow.addView(value);
-
-            value = new TextView(this);
-            value.setLayoutParams(textView.getLayoutParams());
-            value.setGravity(Gravity.CENTER_HORIZONTAL);
-            value.setText("b");
-            tableRow.addView(value);
-
-            value = new TextView(this);
-            value.setLayoutParams(textView.getLayoutParams());
-            value.setGravity(Gravity.CENTER_HORIZONTAL);
-            value.setText("a");
+            value.setText(v.getId().getId());
             tableRow.addView(value);
 
             value = new TextView(this);
@@ -184,81 +162,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
-/*
-import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-
-import net.gormelof.hackathontask.request.searchrecords.SearchData;
-import net.gormelof.hackathontask.response.searchrecords.SearchRecords;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName().toUpperCase();
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        HackathonService hackathonService = ServiceGenerator.createService(HackathonService.class);
-
-        SearchData data = new SearchData();
-        data.setStartDate("2016-01-26");
-        data.setEndDate("2017-02-02");
-        data.setMinCount(2700);
-        data.setMaxCount(3000);
-
-        Call<SearchRecords> call = hackathonService.searchRecords(data);
-        // Set up progress before call
-        final ProgressDialog progressDoalog;
-        progressDoalog = new ProgressDialog(MainActivity.this);
-        progressDoalog.setMax(100);
-        progressDoalog.setMessage("Its loading....");
-        progressDoalog.setTitle("ProgressDialog bar example");
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        // show it
-        progressDoalog.show();
-        call.enqueue(new Callback<SearchRecords>() {
-            @Override
-            public void onResponse(Call<SearchRecords> call, Response<SearchRecords> response) {
-                if (response.isSuccessful()) {
-                    int itemCount = response.body().getRecords().size();
-                    int pageCount = itemCount / 10;
-                    int page = 0;
-                    List<Page> items = new ArrayList<Page>();
-                    for (int i = 0; i < itemCount; i++) {
-                        if (i % 10 == 0) {
-                            page++;
-                        }
-                        items.add(new Page(page, response.body().getRecords().get(i)));
-                    }
-
-
-
-                    String firstItemId = response.body().getRecords().get(1).getId().getId();
-                    Log.i(TAG, "FIRST ITEM ID: " + firstItemId);
-                    progressDoalog.dismiss();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SearchRecords> call, Throwable t) {
-                Log.e(TAG, "ERROR");
-                // close it after response
-                progressDoalog.dismiss();
-            }
-        });
-
-
-
-    }
-}
-*/

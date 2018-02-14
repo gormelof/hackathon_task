@@ -1,4 +1,4 @@
-package net.gormelof.hackathontask;
+package net.gormelof.hackathontask.api;
 
 /*
  * Copyright (c) 2003-2006, Simon Brown

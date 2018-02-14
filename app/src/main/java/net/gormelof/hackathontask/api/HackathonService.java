@@ -1,4 +1,4 @@
-package net.gormelof.hackathontask;
+package net.gormelof.hackathontask.api;
 
 import net.gormelof.hackathontask.request.searchrecords.SearchData;
 import net.gormelof.hackathontask.response.searchrecords.SearchRecords;

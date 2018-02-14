@@ -1,4 +1,4 @@
-package net.gormelof.hackathontask;
+package net.gormelof.hackathontask.api;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
