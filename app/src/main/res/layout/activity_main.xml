@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/main" >
+
+            <TableRow
+                android:background="#ff00aa63"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rowHeader">
+
+                <TextView
+                    android:text="ID"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:typeface="normal"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@android:color/background_light"
+                    android:id="@+id/tvID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="Given Name"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:typeface="normal"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@android:color/background_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:text="Middle Name"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:typeface="normal"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@android:color/background_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:text="Surname"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:typeface="normal"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@android:color/background_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </TableRow>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:background="@drawable/radius_middle"
+                android:layout_height="2dp" />
+        </TableLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#ff00aa63"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Page 1 of 50"
+                android:id="@+id/txtPageCount"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prev"
+                android:id="@+id/btnPrevious"
+                android:layout_weight="1"
+                android:layout_marginRight="2dp" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:id="@+id/btnNext"
+                android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="10dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
